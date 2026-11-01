@@ -1,0 +1,35 @@
+name: KeyKey
+options:
+  bundleIdPrefix: com.zpqn
+  deploymentTarget:
+    macOS: "13.0"
+  xcodeVersion: "15.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "13.0"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_IDENTITY: "-"
+
+targets:
+  KeyKey:
+    type: application
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - path: KeyKey
+    settings:
+      base:
+        PRODUCT_NAME: KeyKey
+        PRODUCT_BUNDLE_IDENTIFIER: com.zpqn.KeyKey
+        INFOPLIST_FILE: KeyKey/Resources/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: NO
+        COMBINE_HIDPI_IMAGES: YES
+        OTHER_LDFLAGS:
+          - -framework
+          - IOKit
+          - -framework
+          - AppKit
