@@ -57,6 +57,30 @@ Pulse `Cmd + R` en Xcode para compilar e iniciar la aplicación.
 * Inglés: [User Manual (docs/manual_en.md)](docs/manual_en.md)
 * Japonés: [日本語取扱説明書 (docs/manual_ja.md)](docs/manual_ja.md)
 * Español: [Manual de Usuario (docs/manual_es.md)](docs/manual_es.md)
+* Auditoría de Seguridad y Arquitectura:
+  * [Informe de Auditoría de Seguridad de Hardware y Protocolo (docs/SECURITY_AUDIT.md)](docs/SECURITY_AUDIT.md)
+  * [Modelo de Dominio y Especificación del Protocolo (CONTEXT.md)](CONTEXT.md)
+  * [ADR-0001: Mitigaciones de Seguridad en el Host (docs/adr/0001-host-side-hardware-security-mitigations.md)](docs/adr/0001-host-side-hardware-security-mitigations.md)
+
+---
+
+## 🛠️ Correcciones de Protocolo y Mejoras de Seguridad
+
+Verificado en hardware real (`KeyKey V1.0.2`):
+* **Filtrado HID de Control y Recepción Asíncrona Interrupt IN**: Conecta exclusivamente con la interfaz de control de 64 bytes (`PrimaryUsagePage = 1, PrimaryUsage = 0`) y lee versión de firmware, nivel de batería y dirección MAC Bluetooth en tiempo real.
+* **Compatibilidad Total con el Protocolo**: Teclas multimedia de 16 bits, desplazamiento X/Y y rueda de ratón, macros de teclado (14 pasos) y ratón (8 pasos), iluminación RGB sincronizada o individual por tecla, inversión visual de teclas, emparejamiento bidireccional con PowerOnMod y actualización DFU USB Bulk nativa.
+* **Protecciones de Seguridad (Mitigación de VULN-01 a VULN-05)**:
+  * **Restablecimiento Seguro de Fábrica (Factory Safe Reset)**: Sobrescribe la memoria Flash Write-Only con valores seguros (`Z` / `X`).
+  * **Auditor de Seguridad de Macros (`MacroSafetyAuditor`)**: Advierte sobre combinaciones críticas (`Cmd+Space`, `Win+R`) o bucles infinitos ultrarrápidos (`<= 20ms`).
+  * **Control de Flujo de 60ms y Heartbeat**: Evita pérdidas de paquetes durante la escritura en DataFlash.
+  * **Lista Blanca SHA-256 y Validación de Binarios**: Verifica el firmware oficial `KeyKey_V102.bin` (límite de 448 KB para CH573F).
+
+---
+
+## 🔗 Firmware Oficial y Enlaces del Fabricante
+
+* **Wiki Oficial del Fabricante (Robit Wiki)**: [https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE](https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE)
+* **Firmware Oficial V1.0.2 Anti-Toque Accidental (`KeyKey_V102.bin`)**: [Descargar paquete de firmware (.zip)](https://pan.lbtrobit.com/f/aQQfR/KeyKey_V102_%E9%98%B2%E8%AF%AF%E8%A7%A6%E7%89%88.zip)
 
 ---
 

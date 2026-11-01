@@ -57,6 +57,30 @@ Xcode で `Cmd + R` を押すと、ビルドと起動が実行されます。
 * 英語: [User Manual (docs/manual_en.md)](docs/manual_en.md)
 * 日本語: [日本語取扱説明書 (docs/manual_ja.md)](docs/manual_ja.md)
 * スペイン語: [Manual de Usuario (docs/manual_es.md)](docs/manual_es.md)
+* セキュリティ監査および設計ドキュメント:
+  * [ハードウェア・プロトコル セキュリティ監査レポート (docs/SECURITY_AUDIT.md)](docs/SECURITY_AUDIT.md)
+  * [ドメインモデルおよび通信仕様 (CONTEXT.md)](CONTEXT.md)
+  * [ADR-0001: ホスト側セキュリティ緩和策 (docs/adr/0001-host-side-hardware-security-mitigations.md)](docs/adr/0001-host-side-hardware-security-mitigations.md)
+
+---
+
+## 🛠️ プロトコル修正とセキュリティ強化
+
+実機（`KeyKey V1.0.2`）にて検証済みの主な改善点：
+* **ベンダー制御 HID フィルタリングと非同期 Interrupt IN**: `PrimaryUsagePage = 1, PrimaryUsage = 0`（64バイト）インターフェースを正確に特定し、ファームウェアバージョン・バッテリー残量・Bluetooth MAC アドレスを非同期で取得。
+* **完全なプロトコル互換**: 16ビットメディアキー、マウスXY移動・ホイール操作、キーボードマクロ（最大14ステップ）＆マウスマクロ（最大8ステップ）、両キー同期／個別 RGB 制御、左右キー表示切替、ワイヤレス電源モジュール双方向ペアリング、および `IOKit.usb` Bulk DFU 更新に対応。
+* **ホスト側セキュリティ保護機能 (VULN-01〜VULN-05 対策)**:
+  * **ワンクリック安全初期化 (Factory Safe Reset)**: Write-Only メモリを安全な初期値（Z/X）で強制上書きし、不正なマクロを消去。
+  * **高リスクマクロ検知 (`MacroSafetyAuditor`)**: `Cmd+Space` や 20ms 以下の超高速無限ループを事前警告。
+  * **60ms 書き込みスロットリング＆死活監視 (Heartbeat)**: DataFlash 書き込み中のパケットロスを防止。
+  * **公式 SHA-256 ホワイトリスト＆バイナリヘッダ検証**: 公式 `KeyKey_V102.bin` のハッシュ検証および不正形式ファイルのブロック。
+
+---
+
+## 🔗 公式ファームウェア・メーカーリンク
+
+* **公式サポート Wiki (Robit Wiki)**: [https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE](https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE)
+* **公式 V1.0.2 誤操作防止・消灯版ファームウェア (`KeyKey_V102.bin`)**: [ファームウェアパッケージ (.zip) をダウンロード](https://pan.lbtrobit.com/f/aQQfR/KeyKey_V102_%E9%98%B2%E8%AF%AF%E8%A7%A6%E7%89%88.zip)
 
 ---
 

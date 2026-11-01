@@ -57,6 +57,30 @@ Press `Cmd + R` in Xcode to build and run.
 * English: [User Manual (docs/manual_en.md)](docs/manual_en.md)
 * Japanese: [日本語取扱説明書 (docs/manual_ja.md)](docs/manual_ja.md)
 * Spanish: [Manual de Usuario (docs/manual_es.md)](docs/manual_es.md)
+* Architecture & Security Audit:
+  * [Hardware & Protocol Security Audit Report (docs/SECURITY_AUDIT.md)](docs/SECURITY_AUDIT.md)
+  * [Domain Model & Protocol Specification (CONTEXT.md)](CONTEXT.md)
+  * [ADR-0001: Host-Side Hardware Security Mitigations (docs/adr/0001-host-side-hardware-security-mitigations.md)](docs/adr/0001-host-side-hardware-security-mitigations.md)
+
+---
+
+## 🛠️ Protocol Fixes & Security Enhancements
+
+Verified against physical `KeyKey V1.0.2` hardware:
+* **Vendor Control HID Filtering & Async Interrupt IN**: Matches `PrimaryUsagePage = 1, PrimaryUsage = 0` (64-byte reports) and receives real-time firmware version, battery percentage, and BLE MAC telemetry via `IOHIDDeviceRegisterInputReportCallback`.
+* **Complete Protocol Alignment**: Supports 16-bit Consumer Media keys, single-key mouse buttons + X/Y cursor displacement + scroll wheel, 14-step keyboard macros & 8-step mouse macros, dual-key synchronized or per-key RGB (`0..255` HSL scaling), key orientation toggle, two-device PowerOnMod pairing, and native `IOKit.usb` Bulk IAP flashing.
+* **Host-Side Security Mitigations (VULN-01 to VULN-05)**:
+  * **Factory Safe Reset**: One-click overwrite of Write-Only hardware Flash to clear potential hidden macros.
+  * **Macro Safety Auditor**: Detects high-risk shortcuts (`Cmd+Space`, `Win+R`) and ultra-fast (`<= 20ms`) infinite loops.
+  * **60ms Command Pacing & Liveness Heartbeat**: Prevents CH57x DataFlash write race conditions and packet drops.
+  * **Firmware SHA-256 Allowlist & Binary Header Inspection**: Validates WCH CH573F (`448 KB` max) binaries and requires explicit confirmation for unsigned custom firmware.
+
+---
+
+## 🔗 Official Firmware & Manufacturer Links
+
+* **Official Robit Wiki (KeyKey BLE)**: [https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE](https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE)
+* **Official V1.0.2 Anti-Accidental-Touch Firmware (`KeyKey_V102.bin`)**: [Download Firmware Package (.zip)](https://pan.lbtrobit.com/f/aQQfR/KeyKey_V102_%E9%98%B2%E8%AF%AF%E8%A7%A6%E7%89%88.zip)
 
 ---
 

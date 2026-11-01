@@ -51,11 +51,25 @@ public struct MainView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .automatic) {
-                    StatusBadge(
-                        isConnected: appVM.deviceStatus.isKeyboardConnected,
-                        connectedText: "KeyKey 已連線",
-                        disconnectedText: "未偵測到鍵盤"
-                    )
+                    HStack(spacing: 10) {
+                        StatusBadge(
+                            isConnected: appVM.deviceStatus.isKeyboardConnected,
+                            connectedText: "KeyKey 已連線 (\(appVM.deviceStatus.keyboardFirmwareVersion))",
+                            disconnectedText: "未偵測到鍵盤"
+                        )
+
+                        if let battery = appVM.deviceStatus.batteryLevel {
+                            HStack(spacing: 4) {
+                                Image(systemName: battery >= 80 ? "battery.100" : (battery >= 40 ? "battery.50" : "battery.25"))
+                                    .foregroundColor(battery > 20 ? .green : .orange)
+                                Text("\(battery)%")
+                                    .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                            }
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.secondary.opacity(0.1), in: Capsule())
+                        }
+                    }
                 }
 
                 ToolbarItem(placement: .automatic) {
@@ -64,7 +78,7 @@ public struct MainView: View {
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
-                    .help("重新查詢設備狀態")
+                    .help("重新查詢設備狀態 (韌體版本、電量與藍牙 MAC)")
                 }
             }
         }
@@ -97,19 +111,24 @@ public struct MainView: View {
     }
 
     private var sidebarBottomStatus: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 4) {
             Divider()
             HStack {
                 Circle()
                     .fill(appVM.deviceStatus.isKeyboardConnected ? Color.green : Color.secondary.opacity(0.4))
                     .frame(width: 8, height: 8)
-                Text(appVM.deviceStatus.isKeyboardConnected ? "設備通訊正常" : "等待連線中...")
-                    .font(.system(size: 11))
+                Text(appVM.deviceStatus.isKeyboardConnected ? "設備通訊正常 (\(appVM.deviceStatus.keyboardFirmwareVersion))" : "等待連線中...")
+                    .font(.system(size: 11, weight: .medium))
                     .foregroundColor(.secondary)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
+            if let mac = appVM.deviceStatus.bluetoothMac {
+                Text("BLE MAC: \(mac)")
+                    .font(.system(size: 10, design: .monospaced))
+                    .foregroundColor(.secondary.opacity(0.8))
+            }
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
     }
 
     private func toastBanner(message: String) -> some View {

@@ -4,13 +4,15 @@ import Foundation
 public struct KeyItem: Identifiable, Hashable, Codable {
     public let id: Int
     public let code: UInt8
+    public let codeHigh: UInt8
     public let name: String
     public let displayLabel: String
     public let category: KeyCategory
 
-    public init(code: UInt8, name: String, displayLabel: String, category: KeyCategory = .standard) {
-        self.id = Int(code)
+    public init(code: UInt8, codeHigh: UInt8 = 0, name: String, displayLabel: String, category: KeyCategory = .standard) {
+        self.id = (Int(codeHigh) << 8) | Int(code)
         self.code = code
+        self.codeHigh = codeHigh
         self.name = name
         self.displayLabel = displayLabel
         self.category = category
@@ -64,6 +66,16 @@ public struct MouseButtonMask: OptionSet, Codable, Hashable {
     public static let middle   = MouseButtonMask(rawValue: 1 << 2) // 4
     public static let sideDown = MouseButtonMask(rawValue: 1 << 3) // 8
     public static let sideUp   = MouseButtonMask(rawValue: 1 << 4) // 16
+
+    public var displayString: String {
+        var parts: [String] = []
+        if contains(.left) { parts.append("左鍵") }
+        if contains(.right) { parts.append("右鍵") }
+        if contains(.middle) { parts.append("中鍵") }
+        if contains(.sideDown) { parts.append("下側鍵") }
+        if contains(.sideUp) { parts.append("上側鍵") }
+        return parts.isEmpty ? "無按鍵" : "滑鼠" + parts.joined(separator: "+")
+    }
 }
 
 /// 鍵位常數庫
@@ -159,25 +171,28 @@ public enum KeyDefinitions {
         KeyItem(code: 79, name: "Right", displayLabel: "→ 右")
     ]
 
-    /// 多媒體消費控制鍵 (Consumer Controls)
+    /// 多媒體消費控制鍵 (Consumer Controls: 16-bit HID Consumer Usage, 拆為 lowByte 與 highByte)
     public static let mediaKeys: [KeyItem] = [
-        KeyItem(code: 226, name: "Mute", displayLabel: "靜音", category: .media),
-        KeyItem(code: 234, name: "Volume-", displayLabel: "音量 -", category: .media),
-        KeyItem(code: 233, name: "Volume+", displayLabel: "音量 +", category: .media),
-        KeyItem(code: 205, name: "PlayPause", displayLabel: "播放 / 暫停", category: .media),
-        KeyItem(code: 182, name: "PrevTrack", displayLabel: "上一曲", category: .media),
-        KeyItem(code: 181, name: "NextTrack", displayLabel: "下一曲", category: .media),
-        KeyItem(code: 112, name: "Brightness-", displayLabel: "螢幕亮度 -", category: .media),
-        KeyItem(code: 111, name: "Brightness+", displayLabel: "螢幕亮度 +", category: .media),
-        KeyItem(code: 146, name: "Calculator", displayLabel: "計算機", category: .media),
-        KeyItem(code: 35,  name: "BrowserHome", displayLabel: "瀏覽器首頁", category: .media),
-        KeyItem(code: 64,  name: "Menu", displayLabel: "選單", category: .media),
-        KeyItem(code: 36,  name: "BrowserBack", displayLabel: "上一頁 / 返回", category: .media)
+        KeyItem(code: 226, codeHigh: 0, name: "Mute", displayLabel: "靜音", category: .media),
+        KeyItem(code: 234, codeHigh: 0, name: "Volume-", displayLabel: "音量 -", category: .media),
+        KeyItem(code: 233, codeHigh: 0, name: "Volume+", displayLabel: "音量 +", category: .media),
+        KeyItem(code: 205, codeHigh: 0, name: "PlayPause", displayLabel: "播放 / 暫停", category: .media),
+        KeyItem(code: 182, codeHigh: 0, name: "PrevTrack", displayLabel: "上一曲", category: .media),
+        KeyItem(code: 181, codeHigh: 0, name: "NextTrack", displayLabel: "下一曲", category: .media),
+        KeyItem(code: 112, codeHigh: 0, name: "Brightness-", displayLabel: "螢幕亮度 -", category: .media),
+        KeyItem(code: 111, codeHigh: 0, name: "Brightness+", displayLabel: "螢幕亮度 +", category: .media),
+        KeyItem(code: 146, codeHigh: 1, name: "Calculator", displayLabel: "計算機", category: .media),
+        KeyItem(code: 35,  codeHigh: 2, name: "BrowserHome", displayLabel: "瀏覽器首頁", category: .media),
+        KeyItem(code: 64,  codeHigh: 0, name: "Menu", displayLabel: "選單", category: .media),
+        KeyItem(code: 36,  codeHigh: 2, name: "BrowserBack", displayLabel: "上一頁 / 返回", category: .media)
     ]
 
     /// 根據鍵碼查詢名稱
-    public static func name(for code: UInt8, type: UInt8) -> String {
+    public static func name(for code: UInt8, codeHigh: UInt8 = 0, type: UInt8) -> String {
         if type == 2 {
+            if let matched = mediaKeys.first(where: { $0.code == code && $0.codeHigh == codeHigh }) {
+                return matched.displayLabel
+            }
             return mediaKeys.first(where: { $0.code == code })?.displayLabel ?? "多媒體鍵 (\(code))"
         } else if type == 3 {
             return mouseName(for: code)
@@ -194,5 +209,87 @@ public enum KeyDefinitions {
         case 16: return "滑鼠上側鍵"
         default: return "滑鼠按鍵 (\(code))"
         }
+    }
+
+    /// 將 macOS NSEvent Virtual KeyCode 轉換為 USB HID Usage ID
+    public static func hidUsage(fromMacKeyCode macCode: UInt16) -> UInt8? {
+        let map: [UInt16: UInt8] = [
+            0x00: 4,  // A
+            0x01: 22, // S
+            0x02: 7,  // D
+            0x03: 9,  // F
+            0x04: 11, // H
+            0x05: 10, // G
+            0x06: 29, // Z
+            0x07: 27, // X
+            0x08: 6,  // C
+            0x09: 25, // V
+            0x0B: 5,  // B
+            0x0C: 20, // Q
+            0x0D: 26, // W
+            0x0E: 8,  // E
+            0x0F: 21, // R
+            0x10: 28, // Y
+            0x11: 23, // T
+            0x12: 30, // 1
+            0x13: 31, // 2
+            0x14: 32, // 3
+            0x15: 33, // 4
+            0x16: 35, // 6
+            0x17: 34, // 5
+            0x18: 46, // =
+            0x19: 38, // 9
+            0x1A: 36, // 7
+            0x1B: 45, // -
+            0x1C: 37, // 8
+            0x1D: 39, // 0
+            0x1E: 48, // ]
+            0x1F: 18, // O
+            0x20: 24, // U
+            0x21: 47, // [
+            0x22: 12, // I
+            0x23: 19, // P
+            0x24: 40, // Return
+            0x25: 15, // L
+            0x26: 13, // J
+            0x27: 52, // '
+            0x28: 14, // K
+            0x29: 51, // ;
+            0x2A: 49, // \
+            0x2B: 54, // ,
+            0x2C: 56, // /
+            0x2D: 17, // N
+            0x2E: 16, // M
+            0x2F: 55, // .
+            0x30: 43, // Tab
+            0x31: 44, // Space
+            0x32: 53, // `
+            0x33: 42, // Backspace
+            0x35: 41, // Esc
+            0x39: 57, // Caps Lock
+            0x7A: 58, // F1
+            0x78: 59, // F2
+            0x63: 60, // F3
+            0x76: 61, // F4
+            0x60: 62, // F5
+            0x61: 63, // F6
+            0x62: 64, // F7
+            0x64: 65, // F8
+            0x65: 66, // F9
+            0x6D: 67, // F10
+            0x67: 68, // F11
+            0x6F: 69, // F12
+            0x72: 73, // Insert / Help
+            0x73: 74, // Home
+            0x74: 75, // PageUp
+            0x75: 76, // Delete Forward
+            0x77: 77, // End
+            0x79: 78, // PageDown
+            0x7B: 80, // Left
+            0x7C: 79, // Right
+            0x7D: 81, // Down
+            0x7E: 82  // Up
+        ]
+        return map[macCode]
     }
 }

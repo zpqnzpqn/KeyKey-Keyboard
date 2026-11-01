@@ -40,6 +40,15 @@ Package.pins
 Package.resolved
 .swiftpm/xcode
 
-# Legacy binary
-KeyKey.app/
+# Scratch & Local Environment / Secrets
 scratch/
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.mobileprovision
+*.xcuserdatad/
+.swiftpm/
+.vscode/
+.idea/

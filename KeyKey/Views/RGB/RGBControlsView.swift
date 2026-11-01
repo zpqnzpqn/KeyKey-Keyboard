@@ -44,7 +44,19 @@ public struct RGBControlsView: View {
 
     // MARK: - 主模式選擇
     private var mainModeSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 16) {
+                Text("套用目標:")
+                    .font(.system(size: 13, weight: .bold))
+                Picker("套用目標", selection: $appVM.rgbConfig.target) {
+                    ForEach(RGBTarget.allCases) { target in
+                        Text(target.displayName).tag(target)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+            }
+
             Text("燈光運作模式")
                 .font(.system(size: 14, weight: .bold))
 

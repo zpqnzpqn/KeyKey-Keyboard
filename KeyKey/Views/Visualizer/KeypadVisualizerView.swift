@@ -19,8 +19,13 @@ public struct KeypadVisualizerView: View {
                 keypadBaseFrame
                     .overlay(
                         HStack(spacing: 24) {
-                            keycapView(index: 0, config: appVM.key1Config)
-                            keycapView(index: 1, config: appVM.key2Config)
+                            if appVM.swapKeyOrder {
+                                keycapView(index: 1, config: appVM.key2Config, positionHint: "左鍵")
+                                keycapView(index: 0, config: appVM.key1Config, positionHint: "右鍵")
+                            } else {
+                                keycapView(index: 0, config: appVM.key1Config, positionHint: "左鍵")
+                                keycapView(index: 1, config: appVM.key2Config, positionHint: "右鍵")
+                            }
                         }
                         .padding(.horizontal, 28)
                         .padding(.vertical, 24)
@@ -30,8 +35,27 @@ public struct KeypadVisualizerView: View {
 
             // 鍵位快速切換與目前配置摘要
             HStack(spacing: 16) {
-                keySelectButton(index: 0, title: "按鍵 1", config: appVM.key1Config)
-                keySelectButton(index: 1, title: "按鍵 2", config: appVM.key2Config)
+                if appVM.swapKeyOrder {
+                    keySelectButton(index: 1, title: "按鍵 2 (左)", config: appVM.key2Config)
+                    keySelectButton(index: 0, title: "按鍵 1 (右)", config: appVM.key1Config)
+                } else {
+                    keySelectButton(index: 0, title: "按鍵 1 (左)", config: appVM.key1Config)
+                    keySelectButton(index: 1, title: "按鍵 2 (右)", config: appVM.key2Config)
+                }
+
+                Button {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
+                        appVM.swapKeyOrder.toggle()
+                    }
+                } label: {
+                    Image(systemName: "arrow.left.arrow.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.secondary)
+                        .padding(7)
+                        .background(Color.secondary.opacity(0.1), in: Circle())
+                }
+                .buttonStyle(.plain)
+                .help("切換左右鍵顯示順序 (預設比照原版：左鍵為按鍵 2、右鍵為按鍵 1)")
             }
         }
     }
@@ -83,7 +107,7 @@ public struct KeypadVisualizerView: View {
     }
 
     // MARK: - 擬真機械鍵帽
-    private func keycapView(index: Int, config: KeyConfig) -> some View {
+    private func keycapView(index: Int, config: KeyConfig, positionHint: String) -> some View {
         let isSelected = appVM.selectedKeyIndex == index
         let isHovered = hoveredKeyIndex == index
 
@@ -114,7 +138,7 @@ public struct KeypadVisualizerView: View {
                     .shadow(color: isSelected ? Color.accentColor.opacity(0.4) : Color.black.opacity(0.15), radius: isSelected ? 8 : 4, y: 3)
 
                 VStack(spacing: 4) {
-                    Text("KEY \(index + 1)")
+                    Text("KEY \(index + 1) · \(positionHint)")
                         .font(.system(size: 10, weight: .bold, design: .rounded))
                         .foregroundColor(isSelected ? .white.opacity(0.8) : .secondary)
 

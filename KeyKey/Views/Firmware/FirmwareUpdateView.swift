@@ -8,6 +8,7 @@ public struct FirmwareUpdateView: View {
     @State private var selectedFirmwareURL: URL? = nil
     @State private var firmwareData: Data? = nil
     @State private var validationResult: FirmwareValidationResult? = nil
+    @State private var allowUnsignedFirmware: Bool = false
     @State private var showWarningAlert: Bool = false
 
     public init(appVM: AppViewModel) {
@@ -16,27 +17,52 @@ public struct FirmwareUpdateView: View {
 
     public var body: some View {
         VStack(spacing: 20) {
-            // 目前設備版本資訊
+            // 目前設備版本資訊與目標選擇
             FrostedCard {
-                HStack(spacing: 16) {
-                    Image(systemName: "cpu")
-                        .font(.system(size: 36))
-                        .foregroundColor(.accentColor)
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("目前設備韌體版本")
-                            .font(.system(size: 14, weight: .bold))
-                        Text(appVM.deviceStatus.keyboardFirmwareVersion)
-                            .font(.system(size: 18, weight: .semibold, design: .monospaced))
+                VStack(alignment: .leading, spacing: 14) {
+                    HStack(spacing: 16) {
+                        Image(systemName: "cpu")
+                            .font(.system(size: 36))
                             .foregroundColor(.accentColor)
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("KeyKey 鍵盤韌體: \(appVM.deviceStatus.keyboardFirmwareVersion)")
+                                .font(.system(size: 14, weight: .bold, design: .monospaced))
+                            Text("無線開機模組韌體: \(appVM.deviceStatus.poweronFirmwareVersion)")
+                                .font(.system(size: 13, design: .monospaced))
+                                .foregroundColor(.secondary)
+                        }
+
+                        Spacer()
+
+                        Button {
+                            appVM.queryDeviceInfo()
+                        } label: {
+                            Label("重新查詢", systemImage: "arrow.clockwise")
+                        }
                     }
 
-                    Spacer()
+                    Divider()
 
-                    Button {
-                        appVM.queryDeviceInfo()
-                    } label: {
-                        Label("重新查詢", systemImage: "arrow.clockwise")
+                    HStack(spacing: 12) {
+                        Text("選擇升級目標設備:")
+                            .font(.system(size: 13, weight: .semibold))
+                        Picker("升級目標設備", selection: $iapVM.targetDevice) {
+                            ForEach(DFUTargetDevice.allCases) { target in
+                                Text(target.rawValue).tag(target)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .labelsHidden()
+                        .onChange(of: iapVM.targetDevice) { newTarget in
+                            if let data = firmwareData {
+                                validationResult = FirmwareValidator.validate(
+                                    data: data,
+                                    fileName: selectedFirmwareURL?.lastPathComponent,
+                                    target: newTarget
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -44,8 +70,20 @@ public struct FirmwareUpdateView: View {
             // 韌體二進位檔案選取區
             FrostedCard {
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("選取韌體更新檔案 (.bin)")
-                        .font(.system(size: 14, weight: .bold))
+                    HStack {
+                        Text("選取韌體更新檔案 (.bin)")
+                            .font(.system(size: 14, weight: .bold))
+                        Spacer()
+                        Link(destination: URL(string: "https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE")!) {
+                            Label("官方韌體發布頁 (Robit Wiki)", systemImage: "safari")
+                                .font(.system(size: 12))
+                        }
+                        Text("·").foregroundColor(.secondary)
+                        Link(destination: URL(string: "https://pan.lbtrobit.com/f/aQQfR/KeyKey_V102_%E9%98%B2%E8%AF%AF%E8%A7%A6%E7%89%88.zip")!) {
+                            Label("下載 V1.0.2 防誤觸關燈版韌體", systemImage: "arrow.down.circle")
+                                .font(.system(size: 12))
+                        }
+                    }
 
                     HStack(spacing: 12) {
                         Button {
@@ -86,6 +124,22 @@ public struct FirmwareUpdateView: View {
                                 .font(.system(size: 11, design: .monospaced))
                                 .foregroundColor(.secondary)
 
+                            if let warning = result.warningMessage {
+                                Text(warning)
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.orange)
+                            }
+
+                            if result.isValid && !result.isOfficialVerified {
+                                Toggle(isOn: $allowUnsignedFirmware) {
+                                    Text("我了解風險，允許刷入未簽章或自訂開發者韌體")
+                                        .font(.system(size: 12, weight: .semibold))
+                                        .foregroundColor(.orange)
+                                }
+                                .toggleStyle(.checkbox)
+                                .padding(.top, 2)
+                            }
+
                             if let error = result.errorMessage {
                                 Text(error)
                                     .font(.system(size: 12))
@@ -112,6 +166,11 @@ public struct FirmwareUpdateView: View {
                         .foregroundColor(.secondary)
 
                     HStack {
+                        if iapVM.state != .idle {
+                            Button("重設狀態") {
+                                iapVM.reset()
+                            }
+                        }
                         Spacer()
                         Button {
                             showWarningAlert = true
@@ -120,7 +179,12 @@ public struct FirmwareUpdateView: View {
                                 .font(.system(size: 13, weight: .semibold))
                         }
                         .buttonStyle(.borderedProminent)
-                        .disabled(firmwareData == nil || !(validationResult?.isValid ?? false) || iapVM.state != .idle)
+                        .disabled(
+                            firmwareData == nil ||
+                            !(validationResult?.isValid ?? false) ||
+                            (!(validationResult?.isOfficialVerified ?? false) && !allowUnsignedFirmware) ||
+                            (iapVM.state != .idle && iapVM.state != .completed)
+                        )
                     }
                 }
             }
@@ -133,12 +197,16 @@ public struct FirmwareUpdateView: View {
             Button("確定開始更新", role: .destructive) {
                 if let data = firmwareData {
                     Task {
-                        await iapVM.flashFirmware(data: data)
+                        await iapVM.flashFirmware(
+                            data: data,
+                            fileName: selectedFirmwareURL?.lastPathComponent,
+                            target: iapVM.targetDevice
+                        )
                     }
                 }
             }
         } message: {
-            Text("更新韌體期間請勿拔出 USB 連接線或關閉電腦，以免設備中斷發生異常。")
+            Text("即將對「\(iapVM.targetDevice.rawValue)」執行 CH57x USB IAP 燒錄。更新韌體期間請勿拔出 USB 連接線或關閉電腦。")
         }
     }
 
@@ -152,9 +220,14 @@ public struct FirmwareUpdateView: View {
 
         if panel.runModal() == .OK, let url = panel.url {
             selectedFirmwareURL = url
+            allowUnsignedFirmware = false
             if let data = try? Data(contentsOf: url) {
                 firmwareData = data
-                validationResult = FirmwareValidator.validate(data: data)
+                validationResult = FirmwareValidator.validate(
+                    data: data,
+                    fileName: url.lastPathComponent,
+                    target: iapVM.targetDevice
+                )
             }
         }
     }

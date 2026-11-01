@@ -72,46 +72,54 @@ Select the `KeyKey` scheme in Xcode and press `Cmd + R` to build and run.
 ### 4.1 Key Customization & Modifiers
 * **Modifier Keys**: Combine `Ctrl`, `Shift`, `Option (Alt)`, and `Command (Win)`.
 * **Standard Keyboard Keys**: Full F1–F12, numeric keys, QWERTY letters, Backspace, Enter, Space, and arrow keys.
-* **Consumer Media Controls**: Mute, Volume Up/Down, Play/Pause, Track Navigation, Display Brightness, Calculator, Browser Home/Back.
-* **Mouse Actions**: Left, Right, Middle click, and Forward/Backward side buttons.
+* **Consumer Media Controls (16-bit HID Usage)**: Mute, Volume Up/Down, Play/Pause, Track Navigation, Display Brightness, Calculator (`0x0192`), Browser Home (`0x0223`), Menu, and Browser Back (`0x0224`).
+* **Mouse Actions (Buttons + Cursor Displacement + Wheel)**: Combine Left, Right, Middle, and Side buttons with **X/Y Cursor Movement (`-127 ~ 127`)** and **Scroll Wheel ticks (`-127 ~ 127`)**.
 
 ### 4.2 Macro Programming & Live Recording
-* **Capacity**: Up to **14 action steps** per key.
-* **Timing**: Individual Press Duration and Delay After for each step (in 10ms units).
+* **Dual Macro Types**:
+  * **Keyboard Macros**: Up to **14 steps** per key (`[modifiers, keyCode, pressDuration, delayAfter]`).
+  * **Mouse Macros**: Up to **8 steps** per key (`[mouseButtons, moveX, moveY, wheel, pressDuration, delayAfter]`).
+* **Timing**: Individual Press Duration and Delay After for each step (in 10ms units, `10ms – 2500ms`).
 * **Loop Modes**: Infinite loop, Hold-to-loop, or specified count (1–250).
-* **Live Keystroke Recording**: Click "Record Keystrokes" and press physical keys on your Mac keyboard to automatically capture key codes and intervals.
+* **Live Keystroke Recording**: Click "Record Keystrokes" and press physical keys on your Mac keyboard (automatically mapped from macOS virtual key codes to USB HID Usage IDs).
+* **Macro Safety Auditor**: Automatically warns before flashing macros containing system execution shortcuts (`Cmd+Space`, `Win+R`) or ultra-fast (`<= 20ms`) continuous loops.
 
 ### 4.3 RGB Lighting Effects
+* **Target Selection**: Apply lighting to **Both Keys Synchronized** (`rgbIndex = 0 & 1` with 60ms pacing), **Key 1 Only**, or **Key 2 Only**.
 * **Trigger Mode**: Lights up upon key press (Lucky Color 1, Lucky Color 2, or Custom Color).
 * **Nightlight Mode**: Static custom color, Breathing light, or dynamic Rainbow wave.
 * **Speed Test (APM)**: Lighting reacts dynamically to your typing speed.
 * **Lights Off**: Turns off all onboard LEDs.
-* **HSL Color Palette**: Real-time Hue, Saturation, and Brightness sliders with visual preview.
+* **HSL Color Palette**: Real-time Hue (`0°–359°`), Saturation, and Lightness sliders (automatically scaled to hardware `0–255`).
 
 ### 4.4 Wireless Power-On Module (PowerOnMod)
-* Pair your KeyKey keyboard with the wireless computer power-on receiver.
-* Check module connection status and firmware version.
-* One-click pairing and unpairing.
+* Connect both KeyKey and PowerOnMod via USB, select which key (**Key 1** or **Key 2**) triggers remote power-on, and click **Pair** to write the keyboard's 6-byte BLE MAC to the module.
+* Supports unilateral **Unpair** even when only one of the two devices is connected.
 
 ### 4.5 Real-time Keypad Input Tester
-* Built-in keystroke test input area.
-* Displays cumulative hit count and timestamped hit history.
+* Built-in keystroke test input area with cumulative hit count and timestamped hit history.
 
-### 4.6 Profile Backup & Sharing
-* Export your entire keymap, macros, and RGB presets to a single `.json` file.
-* Import shared profiles anytime via "Settings" > "Profile Management".
+### 4.6 Profile Backup, USB/BLE Mode Switch & Factory Safe Reset
+* **USB / Bluetooth Mode Switch**: Switch between wired USB priority and wireless BLE mode.
+* **Factory Safe Reset**: Overwrites the Write-Only hardware Flash with safe default single keys (`Z` / `X`) and clears any hidden macros.
+* **Export & Import Profiles (`.json`)**: Sanitizes all parameter bounds, audits macros for safety, and automatically synchronizes all settings to the connected hardware.
 
 ---
 
-## 5. Firmware Update (DFU/IAP) & Safety Notes
+## 5. Firmware Update (DFU/IAP) & Official Firmware Links
 
 > [!CAUTION]
 > Do not disconnect the USB cable or power off your Mac during firmware update!
 
-1. Navigate to the **"Firmware Update"** tab.
-2. Click **"Choose Firmware File..."** to select an official `.bin` firmware file.
-3. The built-in validator verifies file size (512B – 64KB) and computes the SHA-256 checksum.
-4. Click **"Start Firmware Update"** and confirm. The app automatically guides the device through DFU reboot, Flash erase, block write, and verification.
+### Official Firmware Sources
+* **Official Manufacturer Wiki (Robit Wiki)**: [https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE](https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE)
+* **Official V1.0.2 Anti-Accidental-Touch Firmware (`KeyKey_V102.bin`)**: [Download ZIP Package](https://pan.lbtrobit.com/f/aQQfR/KeyKey_V102_%E9%98%B2%E8%AF%AF%E8%A7%A6%E7%89%88.zip)
+
+### Flashing Procedure
+1. Navigate to the **"Firmware Update"** tab and select the target device (**KeyKey Keypad** or **PowerOnMod**).
+2. Click **"Choose Firmware File..."** to select a `.bin` firmware file.
+3. The built-in validator verifies file size (`512B – 448KB` for WCH CH573F), checks the RISC-V vector header, and compares the SHA-256 hash against the official allowlist (requiring explicit confirmation for custom unsigned firmware).
+4. Click **"Start Firmware Update"** to flash via native `IOKit.usb` Bulk transfer (`0x5262:0x0573`).
 
 ---
 

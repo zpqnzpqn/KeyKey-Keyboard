@@ -146,12 +146,15 @@ public struct KeyAssignmentSheet: View {
     private var mediaKeysGrid: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 110, maximum: 140), spacing: 10)], spacing: 10) {
             ForEach(KeyDefinitions.mediaKeys) { item in
-                let isSelected = currentConfigBinding.wrappedValue.keyCode == item.code && currentConfigBinding.wrappedValue.type == .consumer
+                let isSelected = currentConfigBinding.wrappedValue.keyCode == item.code &&
+                    currentConfigBinding.wrappedValue.codeHigh == item.codeHigh &&
+                    currentConfigBinding.wrappedValue.type == .consumer
 
                 Button {
                     currentConfigBinding.wrappedValue.type = .consumer
                     currentConfigBinding.wrappedValue.mode = .single
                     currentConfigBinding.wrappedValue.keyCode = item.code
+                    currentConfigBinding.wrappedValue.codeHigh = item.codeHigh
                 } label: {
                     HStack {
                         Image(systemName: iconForMedia(item.name))
@@ -174,47 +177,140 @@ public struct KeyAssignmentSheet: View {
         .padding(.vertical, 12)
     }
 
-    // MARK: - 滑鼠動作
+    // MARK: - 滑鼠動作 (支援按鍵組合、X/Y 游標位移與滾輪)
     private var mouseActionsGrid: some View {
-        let mouseOptions: [(code: UInt8, name: String, icon: String)] = [
-            (1, "滑鼠左鍵", "computermouse"),
-            (2, "滑鼠右鍵", "computermouse.fill"),
-            (4, "滑鼠中鍵 (滾輪點擊)", "circle.inset.filled"),
-            (8, "滑鼠下側鍵 (前進)", "arrow.forward.circle"),
-            (16, "滑鼠上側鍵 (後退)", "arrow.backward.circle")
+        let mouseOptions: [(mask: MouseButtonMask, name: String, icon: String)] = [
+            (.left, "滑鼠左鍵", "computermouse"),
+            (.right, "滑鼠右鍵", "computermouse.fill"),
+            (.middle, "滑鼠中鍵 (滾輪點擊)", "circle.inset.filled"),
+            (.sideDown, "滑鼠下側鍵 (前進)", "arrow.forward.circle"),
+            (.sideUp, "滑鼠上側鍵 (後退)", "arrow.backward.circle")
         ]
 
-        return VStack(spacing: 12) {
-            ForEach(mouseOptions, id: \.code) { opt in
-                let isSelected = currentConfigBinding.wrappedValue.keyCode == opt.code && currentConfigBinding.wrappedValue.type == .mouse
+        return VStack(alignment: .leading, spacing: 16) {
+            Text("滑鼠按鍵 (可複選組合):")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundColor(.secondary)
 
-                Button {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150, maximum: 220), spacing: 10)], spacing: 10) {
+                ForEach(mouseOptions, id: \.mask.rawValue) { opt in
+                    let isSelected = currentConfigBinding.wrappedValue.type == .mouse &&
+                        currentConfigBinding.wrappedValue.mouseButtons.contains(opt.mask)
+
+                    Button {
+                        currentConfigBinding.wrappedValue.type = .mouse
+                        currentConfigBinding.wrappedValue.mode = .single
+                        if currentConfigBinding.wrappedValue.mouseButtons.contains(opt.mask) {
+                            currentConfigBinding.wrappedValue.mouseButtons.remove(opt.mask)
+                        } else {
+                            currentConfigBinding.wrappedValue.mouseButtons.insert(opt.mask)
+                        }
+                        currentConfigBinding.wrappedValue.keyCode = currentConfigBinding.wrappedValue.mouseButtons.rawValue
+                    } label: {
+                        HStack {
+                            Image(systemName: opt.icon)
+                                .font(.system(size: 15))
+                                .frame(width: 22)
+                            Text(opt.name)
+                                .font(.system(size: 13, weight: .medium))
+                            Spacer()
+                            if isSelected {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.accentColor)
+                            }
+                        }
+                        .padding(.horizontal, 12)
+                        .frame(height: 40)
+                        .background(isSelected ? Color.accentColor.opacity(0.15) : Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 10))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .strokeBorder(isSelected ? Color.accentColor : Color.secondary.opacity(0.2), lineWidth: 1)
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+
+            Divider()
+
+            HStack {
+                Text("游標位移與滾輪動作 (選填):")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.secondary)
+                Spacer()
+                Button("重設位移與滾輪") {
                     currentConfigBinding.wrappedValue.type = .mouse
                     currentConfigBinding.wrappedValue.mode = .single
-                    currentConfigBinding.wrappedValue.keyCode = opt.code
-                } label: {
-                    HStack {
-                        Image(systemName: opt.icon)
-                            .font(.system(size: 16))
-                            .frame(width: 24)
-                        Text(opt.name)
-                            .font(.system(size: 14, weight: .medium))
-                        Spacer()
-                        if isSelected {
-                            Image(systemName: "checkmark")
-                                .font(.system(size: 13, weight: .bold))
-                        }
-                    }
-                    .padding(.horizontal, 16)
-                    .frame(height: 44)
-                    .background(isSelected ? Color.accentColor.opacity(0.15) : Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 10))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .strokeBorder(isSelected ? Color.accentColor : Color.secondary.opacity(0.2), lineWidth: 1)
-                    )
+                    currentConfigBinding.wrappedValue.mouseMoveX = 0
+                    currentConfigBinding.wrappedValue.mouseMoveY = 0
+                    currentConfigBinding.wrappedValue.mouseWheel = 0
                 }
-                .buttonStyle(.plain)
+                .font(.system(size: 12))
             }
+
+            HStack(spacing: 20) {
+                // X 位移
+                HStack(spacing: 6) {
+                    Text("X 軸 (負左/正右):")
+                        .font(.system(size: 12))
+                    Stepper(
+                        "\(currentConfigBinding.wrappedValue.mouseMoveX)",
+                        value: Binding(
+                            get: { Int(currentConfigBinding.wrappedValue.mouseMoveX) },
+                            set: {
+                                currentConfigBinding.wrappedValue.type = .mouse
+                                currentConfigBinding.wrappedValue.mode = .single
+                                currentConfigBinding.wrappedValue.mouseMoveX = Int8(clamping: $0)
+                            }
+                        ),
+                        in: -127...127,
+                        step: 5
+                    )
+                    .font(.system(size: 12, design: .monospaced))
+                }
+
+                // Y 位移
+                HStack(spacing: 6) {
+                    Text("Y 軸 (負上/正下):")
+                        .font(.system(size: 12))
+                    Stepper(
+                        "\(currentConfigBinding.wrappedValue.mouseMoveY)",
+                        value: Binding(
+                            get: { Int(currentConfigBinding.wrappedValue.mouseMoveY) },
+                            set: {
+                                currentConfigBinding.wrappedValue.type = .mouse
+                                currentConfigBinding.wrappedValue.mode = .single
+                                currentConfigBinding.wrappedValue.mouseMoveY = Int8(clamping: $0)
+                            }
+                        ),
+                        in: -127...127,
+                        step: 5
+                    )
+                    .font(.system(size: 12, design: .monospaced))
+                }
+
+                // 滾輪
+                HStack(spacing: 6) {
+                    Text("滾輪 (正上/負下):")
+                        .font(.system(size: 12))
+                    Stepper(
+                        "\(currentConfigBinding.wrappedValue.mouseWheel)",
+                        value: Binding(
+                            get: { Int(currentConfigBinding.wrappedValue.mouseWheel) },
+                            set: {
+                                currentConfigBinding.wrappedValue.type = .mouse
+                                currentConfigBinding.wrappedValue.mode = .single
+                                currentConfigBinding.wrappedValue.mouseWheel = Int8(clamping: $0)
+                            }
+                        ),
+                        in: -127...127,
+                        step: 1
+                    )
+                    .font(.system(size: 12, design: .monospaced))
+                }
+            }
+            .padding(12)
+            .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 10))
         }
         .padding(.horizontal)
         .padding(.vertical, 12)

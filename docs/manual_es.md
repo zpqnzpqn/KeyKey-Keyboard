@@ -72,42 +72,42 @@ Seleccione el esquema `KeyKey` en Xcode y pulse `Cmd + R` para compilar y ejecut
 ### 4.1 Asignación de Teclas y Modificadores
 * **Modificadores**: Combine `Ctrl`, `Shift`, `Option (Alt)` y `Command (Win)`.
 * **Teclado Estándar**: Teclas F1 a F12, números, letras QWERTY, Espacio, Enter, etc.
-* **Control Multimedia**: Volumen, Silencio, Reproducir/Pausa, Brillo, Calculadora, Navegador.
-* **Acciones del Ratón**: Clic izquierdo, derecho, central y botones laterales.
+* **Control Multimedia (16 bits)**: Volumen, Silencio, Reproducir/Pausa, Brillo, Calculadora (`0x0192`), Inicio del navegador (`0x0223`) y Atrás (`0x0224`).
+* **Acciones del Ratón**: Combinación de botones con **desplazamiento de cursor X/Y (`-127 ~ 127`)** y **rueda de desplazamiento (`-127 ~ 127`)**.
 
 ### 4.2 Programación de Macros y Grabación en Vivo
-* **Capacidad**: Hasta **14 pasos de acción** por tecla.
-* **Tiempos**: Duración de pulsación y retardo configurables en unidades de 10 ms.
+* **Capacidad Dual**: **Macros de teclado (hasta 14 pasos)** y **Macros de ratón (hasta 8 pasos)**.
+* **Tiempos**: Duración de pulsación y retardo configurables en unidades de 10 ms (`10ms – 2500ms`).
 * **Modos de Bucle**: Bucle infinito, Bucle al mantener o Contador de repeticiones (1-250).
-* **Grabación en Vivo**: Haga clic en "Grabar pulsaciones" y presione las teclas en su teclado para capturarlas automáticamente.
+* **Auditor de Seguridad**: Advierte antes de guardar macros con atajos del sistema (`Cmd+Space`, `Win+R`) o bucles infinitos ultrarrápidos (`<= 20ms`).
 
 ### 4.3 Efectos de Luz RGB
-* **Modo Toque**: Se ilumina al pulsar (Color de la suerte 1 o 2, o Color personalizado).
-* **Luz Nocturna**: Color estático, Modo respiración u Onda arcoíris.
-* **Prueba de Velocidad (APM)**: La luz reacciona según la velocidad de tecleo.
-* **Apagar Luces**: Desactiva todos los LEDs.
-* **Paleta HSL**: Deslizadores precisos de Tono, Saturación y Brillo.
+* **Selección de Destino**: Aplique efectos a **Ambas Teclas Sincronizadas**, **Solo Tecla 1** o **Solo Tecla 2**.
+* **Paleta HSL**: Deslizadores precisos de Tono (`0°–359°`), Saturación y Brillo (escalados a `0–255` en hardware).
 
 ### 4.4 Módulo de Encendido Inalámbrico (PowerOnMod)
-* Empareje y desvincule su teclado con el módulo de encendido remoto de la computadora con un solo clic.
+* Seleccione qué tecla (**Tecla 1** o **Tecla 2**) activará el encendido remoto y vincule la dirección MAC Bluetooth del teclado con el módulo. Admite desvinculación unilateral.
 
 ### 4.5 Probador de Teclas en Tiempo Real
 * Campo de prueba integrado para verificar la respuesta del teclado y contador de pulsaciones.
 
-### 4.6 Copia de Seguridad y Perfiles
-* Exporte e importe perfiles completos en formato `.json` a través de "Configuración".
+### 4.6 Perfiles, Cambio USB/BLE y Restablecimiento Seguro de Fábrica
+* **Restablecimiento Seguro de Fábrica (Factory Safe Reset)**: Sobrescribe la memoria Flash Write-Only con teclas simples seguras (`Z` / `X`) para eliminar posibles macros ocultas.
+* **Exportar e Importar Perfiles (`.json`)**: Valida los límites de parámetros y sincroniza automáticamente toda la configuración con el hardware conectado.
 
 ---
 
-## 5. Actualización de Firmware (DFU/IAP) y Seguridad
+## 5. Actualización de Firmware (DFU/IAP) y Enlaces Oficiales
 
 > [!CAUTION]
 > ¡No desconecte el cable USB ni apague el Mac durante la actualización del firmware!
 
-1. Vaya a la pestaña **"Actualizar firmware"**.
-2. Haga clic en **"Seleccionar archivo de firmware..."** y elija el archivo `.bin` oficial.
-3. El verificador integrado comprobará el tamaño (512B - 64KB) y la suma de comprobación SHA-256.
-4. Haga clic en **"Comenzar actualización de firmware"** para flashear de forma segura.
+* **Wiki Oficial del Fabricante (Robit Wiki)**: [https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE](https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE)
+* **Firmware Oficial V1.0.2 Anti-Toque Accidental (`KeyKey_V102.bin`)**: [Descargar paquete ZIP](https://pan.lbtrobit.com/f/aQQfR/KeyKey_V102_%E9%98%B2%E8%AF%AF%E8%A7%A6%E7%89%88.zip)
+
+1. Vaya a la pestaña **"Actualizar firmware"** y seleccione el dispositivo de destino (**Teclado KeyKey** o **PowerOnMod**).
+2. Elija el archivo `.bin`. El verificador comprobará el tamaño (`512B - 448KB` para CH573F), el encabezado RISC-V y la lista blanca SHA-256.
+3. Haga clic en **"Comenzar actualización de firmware"** para flashear mediante USB Bulk nativo (`0x5262:0x0573`).
 
 ---
 

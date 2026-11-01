@@ -44,10 +44,30 @@ public struct PowerOnModuleView: View {
                     Text("模組無線配對操作")
                         .font(.system(size: 14, weight: .bold))
 
-                    Text("請先將 KeyKey 小鍵盤連接至電腦，並將無線開機模組接上電源。點擊下方「開始配對」按鈕後，模組 LED 燈將閃爍進入對頻模式。")
+                    Text("請將 KeyKey 小鍵盤與無線開機模組同時透過 USB 連接至電腦。選擇您要作為「無線開機鍵」的實體按鍵後，點擊「開始配對模組」即可將鍵盤藍牙 MAC 寫入開機模組並完成綁定。")
                         .font(.system(size: 13))
                         .foregroundColor(.secondary)
                         .lineSpacing(4)
+
+                    HStack(spacing: 16) {
+                        Text("綁定開機按鍵:")
+                            .font(.system(size: 13, weight: .semibold))
+                        Picker("綁定開機按鍵", selection: $appVM.powerOnPairKeyIndex) {
+                            Text("按鍵 1 (Key 1)").tag(0)
+                            Text("按鍵 2 (Key 2)").tag(1)
+                        }
+                        .pickerStyle(.segmented)
+                        .labelsHidden()
+                        .frame(width: 240)
+
+                        Spacer()
+
+                        if let mac = appVM.deviceStatus.bluetoothMac {
+                            Text("鍵盤 MAC: \(mac)")
+                                .font(.system(size: 12, design: .monospaced))
+                                .foregroundColor(.secondary)
+                        }
+                    }
 
                     HStack(spacing: 16) {
                         Button {
@@ -57,17 +77,36 @@ public struct PowerOnModuleView: View {
                                 .font(.system(size: 13, weight: .semibold))
                         }
                         .buttonStyle(.borderedProminent)
-                        .disabled(!appVM.deviceStatus.isPowerOnConnected && !appVM.deviceStatus.isKeyboardConnected)
+                        .disabled(!appVM.deviceStatus.isPowerOnConnected || !appVM.deviceStatus.isKeyboardConnected)
 
                         Button {
                             appVM.unpairPowerOnModule()
                         } label: {
-                            Label("解除配對", systemImage: "link.badge.plus")
+                            Label("解除配對 (支援單邊強制解綁)", systemImage: "link.badge.plus")
                                 .foregroundColor(.red)
                         }
                         .buttonStyle(.bordered)
                         .disabled(!appVM.deviceStatus.isPowerOnConnected && !appVM.deviceStatus.isKeyboardConnected)
                     }
+                }
+            }
+
+            // 硬體協定安全提示 (VULN-03)
+            FrostedCard {
+                HStack(alignment: .top, spacing: 12) {
+                    Image(systemName: "exclamationmark.shield.fill")
+                        .font(.system(size: 20))
+                        .foregroundColor(.orange)
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("無線配對協定安全提示 (BLE MAC 綁定限制)")
+                            .font(.system(size: 13, weight: .bold))
+                        Text("硬體開機模組採 6-byte 藍牙 MAC 明文綁定，不包含滾動碼或對稱金鑰驗證。請勿將此模組用於無門禁管制的公共場所或高機密伺服器主機；若遺失鍵盤，可僅連接開機模組並點擊上方「解除配對」立即清除綁定。")
+                            .font(.system(size: 12))
+                            .foregroundColor(.secondary)
+                            .lineSpacing(3)
+                    }
+                    Spacer()
                 }
             }
 

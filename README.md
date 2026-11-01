@@ -61,20 +61,52 @@ swift build -c release
 
 ## 📖 使用說明與文件
 
-詳細的圖文操作教學、巨集設定範例、RGB 調光與韌體升級指引，請參閱：
+詳細的圖文操作教學、巨集設定範例、RGB 調光、韌體升級與硬體資安評估報告，請參閱：
 * 繁體中文：[完整使用說明書 (docs/manual_zh-TW.md)](docs/manual_zh-TW.md)
 * English: [User Manual (docs/manual_en.md)](docs/manual_en.md)
 * 日本語: [取扱説明書 (docs/manual_ja.md)](docs/manual_ja.md)
 * Español: [Manual de Usuario (docs/manual_es.md)](docs/manual_es.md)
+* 資安與領域文件：
+  * [硬體與通訊協定資安弱點評估報告 (docs/SECURITY_AUDIT.md)](docs/SECURITY_AUDIT.md)
+  * [領域模型與硬體協定規範 (CONTEXT.md)](CONTEXT.md)
+  * [ADR-0001：主機端針對 CH57x 硬體弱點之防禦緩解架構 (docs/adr/0001-host-side-hardware-security-mitigations.md)](docs/adr/0001-host-side-hardware-security-mitigations.md)
+
+---
+
+## 🛠️ 硬體協定修正與資安強化重點
+
+本原生重構版本經由實機 (`KeyKey V1.0.2`) 驗證，完整修正並強化了以下硬體通訊與安全防護機制：
+
+1. **精準鎖定 Vendor HID 控制通道與非同步 Interrupt IN**：
+   * 過濾複合式 USB 設備的 4 組 HID 介面，僅連接 `PrimaryUsagePage = 1, PrimaryUsage = 0` 之 64-byte 控制通道。
+   * 自動剝離首 byte `0x00` Report ID 對齊 64-byte Output Report，並透過 `IOHIDDeviceRegisterInputReportCallback` 非同步接收韌體版本 (`V1.0.2`)、電池電量 (`%`) 與藍牙 MAC 位址。
+2. **完整硬體協定對齊**：
+   * **單鍵與多媒體**：補齊 16-bit Consumer 多媒體鍵（計算機 `0x0192`、瀏覽器首頁 `0x0223`、返回 `0x0224`）高低位元組拆分，以及單鍵滑鼠按鍵組合 + X/Y 游標位移 + 滾輪刻度。
+   * **雙模巨集編程**：支援「鍵盤巨集（最多 14 步，每步 4 bytes）」與「滑鼠巨集（最多 8 步，每步 6 bytes）」，並將即時錄製之 macOS Virtual KeyCode 自動轉換為 USB HID Usage ID。
+   * **RGB 雙鍵同步與獨立尋址**：支援「雙鍵同步 (`rgbIndex = 0 & 1`)」與單鍵獨立燈效切換，並將飽和度 `S` / 明度 `L` 線性映射為硬體 `0..255` 規格。
+   * **開機模組雙向配對 & 真實 CH57x USB Bulk DFU**：完整支援鍵盤與無線開機模組 (`0x504F`) 雙向配對及 WCH CH573F (`0x0573`) Raw USB Bulk 韌體燒錄。
+3. **主機端資安防護機制 (VULN-01 ~ VULN-05 緩解)**：
+   * **一鍵安全初始化 (`Factory Safe Reset`)**：針對韌體 Write-Only（不支援回讀內部巨集）特性，可一鍵將雙鍵強制覆寫回安全預設單鍵 (`Z` / `X`)，清除未知來源鍵盤可能殘留之隱藏巨集。
+   * **高風險巨集靜態檢測 (`MacroSafetyAuditor`)**：自動偵測 `Cmd+Space`、`Win+R` 等系統快捷鍵或週期 `<= 20ms` 之高速無限循環巨集並跳出風險警告。
+   * **60ms 命令寫入節流與 Heartbeat 存活確認**：防止連續寫入 CH57x DataFlash 時發生靜默掉包。
+   * **韌體標頭檢查與 SHA-256 白名單 (`FirmwareValidator`)**：內建官方 `KeyKey_V102.bin` SHA-256 白名單並攔截 ELF/ZIP/空白映像，刷入自訂韌體須二次確認。
+
+---
+
+## 🔗 原廠資源與韌體取得管道
+
+* **原廠說明書與韌體發佈主頁（蘿蔔兔 Robit Wiki）**：[https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE](https://wiki.lbtrobit.com/zh/HID/KeyKeyBLE)
+* **官方 V1.0.2 防誤觸關燈版韌體下載 (`KeyKey_V102.bin`)**：[點此下載 ZIP 韌體包](https://pan.lbtrobit.com/f/aQQfR/KeyKey_V102_%E9%98%B2%E8%AF%AF%E8%A7%A6%E7%89%88.zip)
+  * *註：出廠預設即為 `V1.0.2`。官方「防誤觸關燈版」功能與出廠版相同，僅移除「同時長按雙鍵 3 秒切換燈效」之硬體快捷鍵，適合不希望長按誤觸亮燈的使用者。*
 
 ---
 
 ## 🔌 硬體通訊規格
 
-* **主鍵盤**：USB VID `0x5262` (21090) / PID `0x4B4B` (19275) / Interface 3
-* **無線開機模組**：USB VID `0x5262` (21090) / PID `0x504F` (20559) / Interface 3
-* **DFU 模式**：USB VID `0x5262` (21090) / PID `0x0573` (1395)
-* **通訊管道**：Apple 原生 `IOKit.hid`（零驅動、免輔助延伸功能、免輪詢）
+* **主鍵盤**：USB VID `0x5262` (21090) / PID `0x4B4B` (19275) / Vendor Control Interface (`UsagePage=1, Usage=0`)
+* **無線開機模組**：USB VID `0x5262` (21090) / PID `0x504F` (20559) / Vendor Control Interface (`UsagePage=1, Usage=0`)
+* **DFU 模式**：USB VID `0x5262` (21090) / PID `0x0573` (1395) / USB Bulk (`EP_OUT=0x02, EP_IN=0x82`)
+* **通訊管道**：Apple 原生 `IOKit.hid` 與 `IOKit.usb`（零驅動、免輔助延伸功能）
 
 ---
 

@@ -53,16 +53,44 @@ public enum RGBMainMode: Int, CaseIterable, Identifiable, Codable {
     }
 }
 
+/// RGB 燈光套用目標
+public enum RGBTarget: String, CaseIterable, Identifiable, Codable {
+    case all = "all"
+    case key1 = "key1"
+    case key2 = "key2"
+
+    public var id: String { rawValue }
+
+    public var displayName: String {
+        switch self {
+        case .all: return "雙鍵同步 (套用至全部)"
+        case .key1: return "僅按鍵 1 (LED 1)"
+        case .key2: return "僅按鍵 2 (LED 2)"
+        }
+    }
+
+    /// 硬體協定對應的 rgbIndex 陣列 (0 = Key 1 LED, 1 = Key 2 LED)
+    public var hardwareIndices: [UInt8] {
+        switch self {
+        case .all: return [0, 1]
+        case .key1: return [0]
+        case .key2: return [1]
+        }
+    }
+}
+
 /// RGB 完整配置模型
 public struct RGBConfig: Codable, Equatable {
+    public var target: RGBTarget = .all
     public var mainMode: RGBMainMode = .nightlight
     public var triggerMode: RGBTriggerMode = .customColor
     public var nightlightMode: RGBNightlightMode = .rainbow
-    public var hue: Double = 180.0       // 0 ~ 360
-    public var saturation: Double = 80.0 // 0 ~ 100
-    public var lightness: Double = 50.0  // 0 ~ 100
+    public var hue: Double = 180.0       // 0 ~ 359
+    public var saturation: Double = 80.0 // 0 ~ 100 (送出硬體時轉換為 0 ~ 255)
+    public var lightness: Double = 50.0  // 0 ~ 100 (送出硬體時轉換為 0 ~ 255)
 
-    public init(mainMode: RGBMainMode = .nightlight, triggerMode: RGBTriggerMode = .customColor, nightlightMode: RGBNightlightMode = .rainbow, hue: Double = 180.0, saturation: Double = 80.0, lightness: Double = 50.0) {
+    public init(target: RGBTarget = .all, mainMode: RGBMainMode = .nightlight, triggerMode: RGBTriggerMode = .customColor, nightlightMode: RGBNightlightMode = .rainbow, hue: Double = 180.0, saturation: Double = 80.0, lightness: Double = 50.0) {
+        self.target = target
         self.mainMode = mainMode
         self.triggerMode = triggerMode
         self.nightlightMode = nightlightMode
