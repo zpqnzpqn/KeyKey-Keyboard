@@ -20,3 +20,7 @@ jobs:
     - name: Build macOS App
       run: |
         xcodebuild -project KeyKey.xcodeproj -scheme KeyKey -configuration Release build CODE_SIGNING_ALLOWED=NO
+
+    - name: Run Unit Tests
+      run: |
+        xcodebuild -project KeyKey.xcodeproj -scheme KeyKey -configuration Debug test CODE_SIGNING_ALLOWED=NO

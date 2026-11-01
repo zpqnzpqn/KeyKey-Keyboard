@@ -13,10 +13,16 @@ settings:
     MACOSX_DEPLOYMENT_TARGET: "13.0"
     DEVELOPMENT_TEAM: ""
     CODE_SIGN_IDENTITY: "-"
-    DEPLOYMENT_POSTPROCESSING: YES
-    STRIP_INSTALLED_PRODUCT: YES
-    STRIP_STYLE: non-global
-    COPY_PHASE_STRIP: YES
+  configs:
+    Debug:
+      ENABLE_TESTABILITY: YES
+      DEPLOYMENT_POSTPROCESSING: NO
+      STRIP_INSTALLED_PRODUCT: NO
+    Release:
+      DEPLOYMENT_POSTPROCESSING: YES
+      STRIP_INSTALLED_PRODUCT: YES
+      STRIP_STYLE: non-global
+      COPY_PHASE_STRIP: YES
 
 targets:
   KeyKey:
@@ -24,7 +30,8 @@ targets:
     platform: macOS
     deploymentTarget: "13.0"
     scheme:
-      testTargets: []
+      testTargets:
+        - KeyKeyTests
     sources:
       - path: KeyKey
     settings:
@@ -35,6 +42,24 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         GENERATE_INFOPLIST_FILE: NO
         COMBINE_HIDPI_IMAGES: YES
+        OTHER_LDFLAGS:
+          - -framework
+          - IOKit
+          - -framework
+          - AppKit
+
+  KeyKeyTests:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - path: KeyKey/Models
+      - path: KeyKey/Core
+      - path: KeyKeyTests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.zpqn.KeyKeyTests
+        GENERATE_INFOPLIST_FILE: YES
         OTHER_LDFLAGS:
           - -framework
           - IOKit

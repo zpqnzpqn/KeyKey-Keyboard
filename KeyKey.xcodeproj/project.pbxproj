@@ -14,11 +14,18 @@
 		114FF5B2BA9AFC6B03794393 /* KeypadVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02644A5D5259AAE0C4EF33D /* KeypadVisualizerView.swift */; };
 		13110DC705D921324C7C8914 /* FirmwareUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A40E9B03A183FFC9DD4F6E /* FirmwareUpdateView.swift */; };
 		20C521C663630AE4768F3E80 /* MacroStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F9FBD8DFD2788036C25F2 /* MacroStep.swift */; };
+		265CE8DAFB7152B31583F014 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22266AFDF44F286AB519FC92 /* AppLanguage.swift */; };
+		40C7C7B0CEBD211C2BE891ED /* KeyConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36502C996A5D42F09A09334C /* KeyConfig.swift */; };
 		456F1FC47DD12AA87991E779 /* HIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169ABE0CB7056D8119D3187 /* HIDManager.swift */; };
+		48BA3BC7B6D4B47FB5122CF2 /* CH57xIAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF9AB7932272EAED46AFD89 /* CH57xIAP.swift */; };
 		4D6F11E78E5B7745E4D7627F /* KeyKeyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124267802777AD3B63FCB0EA /* KeyKeyApp.swift */; };
 		533EC3736E1616736130A373 /* MacroEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E63588A4A316A5FFF43022 /* MacroEditorView.swift */; };
+		598F60C7F4B84FEBDA65B9BC /* RGBConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F24F8F927EC0718E69B54B0 /* RGBConfig.swift */; };
 		6E07FBB43BD1FF1877312F69 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E9AE98000075A26C06F090 /* ProfileManager.swift */; };
+		7317EC58A9EDAAB7907C288D /* FirmwareValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217FD80E6791C0C645BFDBDB /* FirmwareValidator.swift */; };
+		73E3921257C39A514C9899E8 /* MacroStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F9FBD8DFD2788036C25F2 /* MacroStep.swift */; };
 		752753A36298CA5C258DF914 /* RGBControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25CD8AC35FC01D3443D6119 /* RGBControlsView.swift */; };
+		77EBDAF02326D665F6E64A97 /* KeyKeyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACB35ADF05721A40D82FCC7 /* KeyKeyCommand.swift */; };
 		7ADE905BE54D938382EB326C /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22266AFDF44F286AB519FC92 /* AppLanguage.swift */; };
 		88FD66A2219A8AAA4348A868 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8F2A63C3067DB1587BB941 /* AppViewModel.swift */; };
 		941B649876603DD5889B9D7E /* DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4220BEC489890577DFD17E8 /* DeviceStatus.swift */; };
@@ -26,12 +33,18 @@
 		98B475D020CF4508CF208C4C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 905DEAD75A7E853019D54BE7 /* Localizable.xcstrings */; };
 		99285682067792CD55B5BCCA /* KeyInputTesterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E7EDBDF1A70D8AF78665AF /* KeyInputTesterView.swift */; };
 		9F3ADB3FA85C8A9079C2989C /* HIDDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C0262C160AB7D978F1B68 /* HIDDevice.swift */; };
+		B7D2ABC6808B578B3C5EE0E9 /* HIDDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C0262C160AB7D978F1B68 /* HIDDevice.swift */; };
 		C2FBDAA1F2D327A46CCB0D60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B79406F0FDCA482595A88F17 /* Assets.xcassets */; };
 		C70B7B724E33C45F7E778A3B /* KeyAssignmentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34985B8AF3D87EF08C47CCF3 /* KeyAssignmentSheet.swift */; };
+		D678B2F5A274068CA5FF825E /* DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4220BEC489890577DFD17E8 /* DeviceStatus.swift */; };
+		D91A673C5D22A2D854406E27 /* KeyKeyProtocolAndSecurityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB1320D60D76F1CAC26764 /* KeyKeyProtocolAndSecurityTests.swift */; };
+		DB01707F71F3269032B05097 /* HIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169ABE0CB7056D8119D3187 /* HIDManager.swift */; };
 		DBE1B70D639E81B171FBE62F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B542F6B7944380A8456651B /* MainView.swift */; };
 		DEE77CBC970E4D1FC323DF8E /* FirmwareValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217FD80E6791C0C645BFDBDB /* FirmwareValidator.swift */; };
 		E22DAB0F29F39927A6A2CB6D /* CH57xIAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF9AB7932272EAED46AFD89 /* CH57xIAP.swift */; };
+		F59F0C7836AA0FC3389D9455 /* KeyDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068728DBA160C2ACDEEC284 /* KeyDefinitions.swift */; };
 		F62292BDA4964B010B7C627D /* PowerOnModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16CA382405437F47B7CEE9 /* PowerOnModuleView.swift */; };
+		F7736C31BD1010103B53EB16 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E9AE98000075A26C06F090 /* ProfileManager.swift */; };
 		FC2D5B5793AFCD63021D2598 /* SettingsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F15D5FF01CDABCF76AEFE3 /* SettingsSheetView.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,12 +54,14 @@
 		217FD80E6791C0C645BFDBDB /* FirmwareValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareValidator.swift; sourceTree = "<group>"; };
 		22266AFDF44F286AB519FC92 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		25E9AE98000075A26C06F090 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		26B144EE2C88EFAE9CA0BF99 /* KeyKeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyKeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3169ABE0CB7056D8119D3187 /* HIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDManager.swift; sourceTree = "<group>"; };
 		34985B8AF3D87EF08C47CCF3 /* KeyAssignmentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyAssignmentSheet.swift; sourceTree = "<group>"; };
 		36502C996A5D42F09A09334C /* KeyConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConfig.swift; sourceTree = "<group>"; };
 		37092B3668A3CA1911B60C25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		42F15D5FF01CDABCF76AEFE3 /* SettingsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheetView.swift; sourceTree = "<group>"; };
 		4B542F6B7944380A8456651B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4EEB1320D60D76F1CAC26764 /* KeyKeyProtocolAndSecurityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyKeyProtocolAndSecurityTests.swift; sourceTree = "<group>"; };
 		55A40E9B03A183FFC9DD4F6E /* FirmwareUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareUpdateView.swift; sourceTree = "<group>"; };
 		5F24F8F927EC0718E69B54B0 /* RGBConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBConfig.swift; sourceTree = "<group>"; };
 		6D75A32118B659869406C401 /* FrostedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostedCard.swift; sourceTree = "<group>"; };
@@ -223,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				43846F724D8889D7FBCFEFFA /* KeyKey */,
+				D71B617AC8E9D3D1EE711B59 /* KeyKeyTests */,
 				D845FCE8AB718D8616B5399D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -235,10 +251,19 @@
 			path = Tester;
 			sourceTree = "<group>";
 		};
+		D71B617AC8E9D3D1EE711B59 /* KeyKeyTests */ = {
+			isa = PBXGroup;
+			children = (
+				4EEB1320D60D76F1CAC26764 /* KeyKeyProtocolAndSecurityTests.swift */,
+			);
+			path = KeyKeyTests;
+			sourceTree = "<group>";
+		};
 		D845FCE8AB718D8616B5399D /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				A8A0CBB5A835E45DE3F9ABCE /* KeyKey.app */,
+				26B144EE2C88EFAE9CA0BF99 /* KeyKeyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -290,6 +315,23 @@
 			productReference = A8A0CBB5A835E45DE3F9ABCE /* KeyKey.app */;
 			productType = "com.apple.product-type.application";
 		};
+		983F245D9C1A4C230C617430 /* KeyKeyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F544DBBD556B4BE66AB0CB8 /* Build configuration list for PBXNativeTarget "KeyKeyTests" */;
+			buildPhases = (
+				6CDE8413BAA9A521D9558126 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeyKeyTests;
+			packageProductDependencies = (
+			);
+			productName = KeyKeyTests;
+			productReference = 26B144EE2C88EFAE9CA0BF99 /* KeyKeyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -300,6 +342,9 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					738CE253AC77720ED960AFB5 = {
+						DevelopmentTeam = "";
+					};
+					983F245D9C1A4C230C617430 = {
 						DevelopmentTeam = "";
 					};
 				};
@@ -322,6 +367,7 @@
 			projectRoot = "";
 			targets = (
 				738CE253AC77720ED960AFB5 /* KeyKey */,
+				983F245D9C1A4C230C617430 /* KeyKeyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -339,6 +385,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6CDE8413BAA9A521D9558126 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				265CE8DAFB7152B31583F014 /* AppLanguage.swift in Sources */,
+				48BA3BC7B6D4B47FB5122CF2 /* CH57xIAP.swift in Sources */,
+				D678B2F5A274068CA5FF825E /* DeviceStatus.swift in Sources */,
+				7317EC58A9EDAAB7907C288D /* FirmwareValidator.swift in Sources */,
+				B7D2ABC6808B578B3C5EE0E9 /* HIDDevice.swift in Sources */,
+				DB01707F71F3269032B05097 /* HIDManager.swift in Sources */,
+				40C7C7B0CEBD211C2BE891ED /* KeyConfig.swift in Sources */,
+				F59F0C7836AA0FC3389D9455 /* KeyDefinitions.swift in Sources */,
+				77EBDAF02326D665F6E64A97 /* KeyKeyCommand.swift in Sources */,
+				D91A673C5D22A2D854406E27 /* KeyKeyProtocolAndSecurityTests.swift in Sources */,
+				73E3921257C39A514C9899E8 /* MacroStep.swift in Sources */,
+				F7736C31BD1010103B53EB16 /* ProfileManager.swift in Sources */,
+				598F60C7F4B84FEBDA65B9BC /* RGBConfig.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C4452D4C8AE13F69BE0C1D45 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -492,9 +558,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEPLOYMENT_POSTPROCESSING = YES;
+				DEPLOYMENT_POSTPROCESSING = NO;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -518,13 +584,58 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				STRIP_INSTALLED_PRODUCT = YES;
-				STRIP_STYLE = "non-global";
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;
 			};
 			name = Debug;
+		};
+		CD046E8E8075A7F1901B5B06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					IOKit,
+					"-framework",
+					AppKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zpqn.KeyKeyTests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E6D37E0C4797E24466B61080 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					IOKit,
+					"-framework",
+					AppKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zpqn.KeyKeyTests;
+				SDKROOT = macosx;
+			};
+			name = Release;
 		};
 		E7BA26916F975122EB8BD417 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -553,6 +664,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4F544DBBD556B4BE66AB0CB8 /* Build configuration list for PBXNativeTarget "KeyKeyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD046E8E8075A7F1901B5B06 /* Debug */,
+				E6D37E0C4797E24466B61080 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		91F8E4B938405AF4199F6405 /* Build configuration list for PBXNativeTarget "KeyKey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
