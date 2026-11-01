@@ -1,818 +1,969 @@
 {
-  "sourceLanguage": "zh-Hant",
-  "strings": {
-    "按鍵自訂": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "按鍵自訂"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Key Customization"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "キーのカスタマイズ"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personalización de teclas"
+  "sourceLanguage" : "zh-Hant",
+  "strings" : {
+    "#%@" : {
+
+    },
+    "%@" : {
+
+    },
+    "%@ ms" : {
+
+    },
+    "%@: %@" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@"
           }
         }
       }
     },
-    "巨集編程": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "巨集編程"
+    "%@%%" : {
+
+    },
+    "%@°" : {
+
+    },
+    "KEY %@" : {
+
+    },
+    "KeyKey for macOS" : {
+
+    },
+    "KeyKey 已連線" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KeyKey Connected"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Macro Programming"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KeyKey conectado"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "マクロプログラミング"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KeyKey 接続済み"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Programación de macros"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KeyKey 已連線"
           }
         }
       }
     },
-    "RGB 燈效": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RGB 燈效"
+    "RGB 燈效" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RGB Lighting"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RGB Lighting"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Efectos de luz RGB"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RGBライティング"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RGBライティング"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Efectos de luz RGB"
-          }
-        }
-      }
-    },
-    "開機模組": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "開機模組"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Power-On Module"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "電源モジュール"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Módulo de encendido"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RGB 燈效"
           }
         }
       }
     },
-    "按鍵測試": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "按鍵測試"
+    "SHA-256 校驗值: %@" : {
+
+    },
+    "介面語言 (Language)" : {
+
+    },
+    "修飾鍵:" : {
+
+    },
+    "偏好設定" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keypad Tester"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "キーテスト"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "環境設定"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prueba de teclas"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "偏好設定"
           }
         }
       }
     },
-    "韌體升級": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "韌體升級"
+    "停止錄製" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop Recording"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firmware Update"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detener grabación"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ファームウェア更新"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "録音停止"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actualizar firmware"
-          }
-        }
-      }
-    },
-    "偏好設定": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "偏好設定"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "環境設定"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Configuración"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止錄製"
           }
         }
       }
     },
-    "儲存到設備": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "儲存到設備"
+    "儲存到設備" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save to Device"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save to Device"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar en el dispositivo"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "デバイスに保存"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "デバイスに保存"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guardar en el dispositivo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "儲存到設備"
           }
         }
       }
     },
-    "標準鍵盤": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "標準鍵盤"
+    "即時字元測試輸入框 (點擊聚焦敲擊鍵盤):" : {
+
+    },
+    "即時錄製按鍵" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record Keystrokes"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard Keyboard"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grabar pulsaciones"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "標準キーボード"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キーストローク録音"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teclado estándar"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "即時錄製按鍵"
           }
         }
       }
     },
-    "多媒體控制": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "多媒體控制"
+    "在此測試您剛自訂的鍵位或巨集輸出是否如預期。" : {
+
+    },
+    "多媒體控制" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Media Controls"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Media Controls"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controles multimedia"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メディア制御"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メディア制御"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Controles multimedia"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "多媒體控制"
           }
         }
       }
     },
-    "滑鼠動作": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "滑鼠動作"
+    "完全關閉燈光" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lights Off"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mouse Actions"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luces apagadas"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "マウス操作"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "消灯"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Acciones de ratón"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完全關閉燈光"
           }
         }
       }
     },
-    "無限循環": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "無限循環"
+    "小夜燈效果:" : {
+
+    },
+    "小夜燈模式" : {
+
+    },
+    "尚未建立步驟，點擊下方「新增步驟」或使用「即時錄製」" : {
+
+    },
+    "尚未選取檔案" : {
+
+    },
+    "尚無擊鍵記錄..." : {
+
+    },
+    "巨集編程" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Macro Programming"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Infinite Loop"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programación de macros"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "無限ループ"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "マクロプログラミング"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bucle infinito"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "巨集編程"
           }
         }
       }
     },
-    "按住循環": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "按住循環"
+    "幸運色 1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lucky Color 1"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hold to Loop"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color de la suerte 1"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "長押しループ"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ラッキーカラー 1"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bucle al mantener"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "幸運色 1"
           }
         }
       }
     },
-    "指定次數": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "指定次數"
+    "幸運色 2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lucky Color 2"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Repeat Count"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color de la suerte 2"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "指定回数"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ラッキーカラー 2"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Repeticiones"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "幸運色 2"
           }
         }
       }
     },
-    "即時錄製按鍵": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "即時錄製按鍵"
+    "延遲:" : {
+
+    },
+    "彩虹流光" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rainbow Wave"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Record Keystrokes"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onda arcoíris"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "キーストローク録音"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "レインボー流光"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grabar pulsaciones"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "彩虹流光"
           }
         }
       }
     },
-    "停止錄製": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "停止錄製"
+    "循環模式:" : {
+
+    },
+    "您可以將目前按鍵自訂、巨集步進序列與 RGB 燈效匯出為單一 JSON 設定檔備份，或匯入他人分享的配置。" : {
+
+    },
+    "所有 LED 燈光已關閉。" : {
+
+    },
+    "手速測驗 (APM)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speed Test (APM)"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stop Recording"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prueba de velocidad (APM)"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "録音停止"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タイピング速度測定 (APM)"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detener grabación"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "手速測驗 (APM)"
           }
         }
       }
     },
-    "幸運色 1": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "幸運色 1"
+    "手速測驗模式：燈光將隨您擊鍵頻率變換反應速度。" : {
+
+    },
+    "指定次數" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeat Count"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lucky Color 1"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeticiones"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ラッキーカラー 1"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "指定回数"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Color de la suerte 1"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "指定次數"
           }
         }
       }
     },
-    "幸運色 2": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "幸運色 2"
+    "指定色呼吸燈" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breathing Light"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lucky Color 2"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luz de respiración"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ラッキーカラー 2"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ブリージング"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Color de la suerte 2"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "指定色呼吸燈"
           }
         }
       }
     },
-    "自訂顏色": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自訂顏色"
+    "指定色恆亮" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Static Color"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Custom Color"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color estático"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "カスタム色"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "単色点灯"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Color personalizado"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "指定色恆亮"
           }
         }
       }
     },
-    "指定色恆亮": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "指定色恆亮"
+    "按下:" : {
+
+    },
+    "按下亮燈 (觸發)" : {
+
+    },
+    "按下觸發效果:" : {
+
+    },
+    "按住循環" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hold to Loop"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Static Color"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bucle al mantener"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "単色点灯"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長押しループ"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Color estático"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "按住循環"
           }
         }
       }
     },
-    "指定色呼吸燈": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "指定色呼吸燈"
+    "按鍵測試" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keypad Tester"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Breathing Light"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prueba de teclas"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ブリージング"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キーテスト"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luz de respiración"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "按鍵測試"
           }
         }
       }
     },
-    "彩虹流光": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "彩虹流光"
+    "按鍵自訂" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key Customization"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rainbow Wave"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalización de teclas"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "レインボー流光"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キーのカスタマイズ"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Onda arcoíris"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "按鍵自訂"
           }
         }
       }
     },
-    "手速測驗 (APM)": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "手速測驗 (APM)"
+    "擊鍵日誌 (即時抓取):" : {
+
+    },
+    "明度 (L):" : {
+
+    },
+    "更新狀態與進度" : {
+
+    },
+    "更新韌體期間請勿拔出 USB 連接線或關閉電腦，以免設備中斷發生異常。" : {
+
+    },
+    "未偵測到鍵盤" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keyboard Not Detected"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Speed Test (APM)"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teclado no detectado"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "タイピング速度測定 (APM)"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キーボード未検出"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prueba de velocidad (APM)"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未偵測到鍵盤"
           }
         }
       }
     },
-    "完全關閉燈光": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "完全關閉燈光"
+    "標準鍵盤" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard Keyboard"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lights Off"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teclado estándar"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "消灯"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "標準キーボード"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luces apagadas"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "標準鍵盤"
           }
         }
       }
     },
-    "開始配對模組": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "開始配對模組"
+    "模組無線配對操作" : {
+
+    },
+    "檔案大小: %@ 位元組 (bytes)" : {
+
+    },
+    "步驟數: %@ / 14" : {
+
+    },
+    "測試提示" : {
+
+    },
+    "滑鼠動作" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mouse Actions"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start Pairing"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acciones de ratón"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ペアリング開始"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "マウス操作"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Iniciar emparejamiento"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "滑鼠動作"
           }
         }
       }
     },
-    "解除配對": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "解除配對"
+    "無線遠端開機模組 (PowerOnMod)" : {
+
+    },
+    "無限循環" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Infinite Loop"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unpair"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bucle infinito"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ペアリング解除"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無限ループ"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desvincular"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無限循環"
           }
         }
       }
     },
-    "KeyKey 已連線": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "KeyKey 已連線"
+    "燈光運作模式" : {
+
+    },
+    "版本 1.0.0 (Native Swift 6 & SwiftUI)" : {
+
+    },
+    "目前指派: %@" : {
+
+    },
+    "目前設備韌體版本" : {
+
+    },
+    "累計擊鍵次數" : {
+
+    },
+    "編輯目標：按鍵 %@" : {
+
+    },
+    "自訂色彩調試" : {
+
+    },
+    "自訂顏色" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom Color"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "KeyKey Connected"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color personalizado"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "KeyKey 接続済み"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "カスタム色"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "KeyKey conectado"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自訂顏色"
           }
         }
       }
     },
-    "未偵測到鍵盤": {
-      "extractionState": "manual",
-      "localizations": {
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "未偵測到鍵盤"
+    "色相 (H):" : {
+
+    },
+    "解除配對" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unpair"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keyboard Not Detected"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desvincular"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "キーボード未検出"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ペアリング解除"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teclado no detectado"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "解除配對"
           }
         }
       }
+    },
+    "設定檔備份與共享 (Profile Management)" : {
+
+    },
+    "請先將 KeyKey 小鍵盤連接至電腦，並將無線開機模組接上電源。點擊下方「開始配對」按鈕後，模組 LED 燈將閃爍進入對頻模式。" : {
+
+    },
+    "選取韌體更新檔案 (.bin)" : {
+
+    },
+    "開始配對模組" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Pairing"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar emparejamiento"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ペアリング開始"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開始配對模組"
+          }
+        }
+      }
+    },
+    "開機模組" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Power-On Module"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Módulo de encendido"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "電源モジュール"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開機模組"
+          }
+        }
+      }
+    },
+    "韌體升級" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firmware Update"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar firmware"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ファームウェア更新"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "韌體升級"
+          }
+        }
+      }
+    },
+    "韌體版本: %@" : {
+
+    },
+    "飽和度 (S):" : {
+
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }
